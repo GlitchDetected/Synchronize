@@ -1,0 +1,60 @@
+@import "tailwindcss";
+@config "../tailwind.config.ts";
+
+@layer base {
+    :root {
+        --radius: 0.5rem;
+    }
+    .dark {
+        --background: 240 14% 7%;
+        --background-2: 240 15% 10%;
+        --foreground: 210 20% 98%;
+        --popover: 240 15% 10%;
+        --popover-foreground: 210 20% 98%;
+        --secondary: 240 15% 10%;
+        --secondary-foreground: 220.9 39.3% 89%;
+        --primary: 258 90% 66%;
+        --primary-foreground: 210 20% 98%;
+        --muted: 260 3% 10%;
+        --muted-foreground: 240 6% 55%;
+        --accent: 258 89% 66%;
+        --accent-foreground: 210 20% 98%;
+        --destructive: 0 84% 60%;
+        --destructive-foreground: 210 20% 98%;
+        --border: 240 16% 16%;
+        --input: 240 16% 16;
+        --ring: 258 89% 66%;
+        --chart-1: 220 70% 50%;
+        --chart-2: 160 60% 45%;
+        --chart-3: 30 80% 55%;
+        --chart-4: 280 65% 60%;
+        --chart-5: 340 75% 55%;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border ease-in-out;
+    }
+    body {
+        @apply bg-background text-foreground max-w-screen overflow-x-hidden;
+    }
+    button {
+        @apply cursor-pointer
+    }
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+}
