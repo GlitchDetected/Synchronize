@@ -12,7 +12,7 @@ export default [
         layout("./(app)/rooms/layout.tsx", [
             route("rooms/:sid", "./(app)/rooms/[sid]/route.tsx"),
             route("rooms/:sid/:rid", "./(app)/rooms/[sid]/[rid]/route.tsx"),
-            // route("rooms/settings", "./(app)/rooms/settings/route.tsx"),
+            route("rooms/settings", "./(app)/rooms/settings/route.tsx"),
             route("rooms/*", "./(app)/not-found.tsx")
         ])
     ])

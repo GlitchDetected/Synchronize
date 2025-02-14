@@ -45,8 +45,10 @@ Core Philosophy
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## setup
+For the setup, you can run make to automate (faster approach) or manually run the commands below
 
 `./gateway`
+- create a .env file in `./gateway`
 - install go @ https://go.dev/doc/install
 - go run main.go
 
@@ -60,6 +62,7 @@ PGCONNECTIONSTRING="postgresql://postgres:passwordforyourdb@yourhost:5432/databa
 ---------
 `./web`
 - install nodejs @ https://nodejs.org/en/download
+- create a .env file in `./web`
 - npm install
 - npm run dev
 - open http://localhost:5173/login in your browser

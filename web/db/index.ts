@@ -28,5 +28,5 @@ export const db = new Kysely<Database>({
 
 export const sequelize = new Sequelize(connection, {
     dialect: "postgres",
-    logging: true
+    logging: false
 });
