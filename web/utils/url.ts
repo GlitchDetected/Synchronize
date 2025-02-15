@@ -1,6 +1,6 @@
 import { Config } from "~/constants/config";
 
-export function getUserAvatarUrl(id: number) {
+export function getUserAvatarUrl() {
     return "/syncmascot.png";
 }
 

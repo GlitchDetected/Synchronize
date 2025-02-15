@@ -55,7 +55,7 @@ const RoomAttributes = {
 class Room extends Model {
     declare id: number;
     declare name: string;
-    declare type: number; // RoomType as number
+    declare type: number;
     declare flags: number;
     declare position: number;
     declare server_id: number;
@@ -63,7 +63,6 @@ class Room extends Model {
     declare readonly created_at: Date;
 }
 
-// Initialize Room model
 Room.init(RoomAttributes, {
     sequelize,
     modelName: "Rooms",

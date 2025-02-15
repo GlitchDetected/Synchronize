@@ -1,7 +1,8 @@
-// https://www.slatejs.org/examples/mentions
-// https://github.com/ianstormtaylor/slate/blob/main/site/examples/ts/mentions.tsx
-// ... to complicated,,
+import emojiData from "@emoji-mart/data";
+import Picker from "@emoji-mart/react";
+import { Smile } from "lucide-react";
 
+// Icon for the emoji picker button
 import { useMemo, useRef, useState } from "react";
 import { useParams } from "react-router";
 
@@ -15,15 +16,19 @@ import { TextareaAutosize } from "../ui/textarea-autosize";
 
 export function MessageInput() {
     const [inputValue, setInputValue] = useState<string>("");
+    const [emojiPickerOpen, setEmojiPickerOpen] = useState(false);
     const textarea = useRef<HTMLTextAreaElement | null>(null);
     const params = useParams();
 
-    const options = useMemo(() => [
-        { id: 1, name: "Devannounce", type: AutocompleteType.User },
-        { id: 2, name: "rules", type: AutocompleteType.User },
-        { id: 3, name: "general", type: AutocompleteType.Channel },
-        { id: 4, name: "videos", type: AutocompleteType.Channel }
-    ], []);
+    const options = useMemo(
+        () => [
+            { id: 1, name: "Devannounce", type: AutocompleteType.User },
+            { id: 2, name: "rules", type: AutocompleteType.User },
+            { id: 3, name: "general", type: AutocompleteType.Channel },
+            { id: 4, name: "videos", type: AutocompleteType.Channel }
+        ],
+        []
+    );
 
     const { filteredOptions, focused, onChange, onKeyDown, onSelect, ...props } = useAutocomplete({
         options,
@@ -66,15 +71,22 @@ export function MessageInput() {
         });
     }
 
+    function addEmoji(emoji: any) {
+        setInputValue((prev) => prev + emoji.native);
+        setEmojiPickerOpen(false);
+        textarea.current?.focus();
+    }
+
     return (
-        <div className="m-3">
-            {focused &&
+        <div className="relative m-3 flex items-center">
+            {focused && (
                 <AutoComplete
                     options={filteredOptions}
                     onSelect={onSelect}
                     {...props}
                 />
-            }
+            )}
+
             <TextareaAutosize
                 ref={textarea}
                 value={inputValue}
@@ -98,8 +110,25 @@ export function MessageInput() {
                     if ("message" in message) return; // TODO: error?
                     setInputValue("");
                 }}
+                className="w-full pr-10"
                 {...props}
             />
+
+            {/* Emoji Picker Button */}
+            <button
+                type="button"
+                onClick={() => setEmojiPickerOpen(!emojiPickerOpen)}
+                className="absolute right-3 text-gray-500 hover:text-white"
+            >
+                <Smile size={22} />
+            </button>
+
+            {/* Emoji Picker */}
+            {emojiPickerOpen && (
+                <div className="absolute bottom-14 right-0 z-50">
+                    <Picker data={emojiData} onEmojiSelect={addEmoji} theme="dark" />
+                </div>
+            )}
         </div>
     );
 }

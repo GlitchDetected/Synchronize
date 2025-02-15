@@ -56,7 +56,7 @@ function UserAvatar({
     className?: string;
 }) {
     const src = id
-        ? getUserAvatarUrl(id)
+        ? getUserAvatarUrl()
         : undefined;
 
     return (

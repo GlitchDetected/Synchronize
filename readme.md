@@ -46,6 +46,9 @@ Core Philosophy
 
 ## setup
 For the setup, you can run make to automate (faster approach) or manually run the commands below
+`makefile`
+- make gateway
+- make web
 
 `./gateway`
 - create a .env file in `./gateway`

@@ -59,7 +59,7 @@ export function RoomList() {
                             variant="link"
                         >
                             <PlusIcon />
-                            Create new room
+                            Create new channel#️⃣
                         </Button>
                     </CreateRoomModal>
                 }

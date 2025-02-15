@@ -19,6 +19,7 @@ async function createServer(request: Request, userId: number) {
     const { data, success, error } = APIPostServersBodySchema.safeParse(await request.json());
     if (!success) throw httpError(HttpErrorMessage.BadRequest, error);
 
+    // Insert new server
     const server = await db
         .insertInto("servers")
         .values({
@@ -30,6 +31,7 @@ async function createServer(request: Request, userId: number) {
 
     if (!server) throw httpError();
 
+    // Insert user as a member of the new server
     const member = await db
         .insertInto("server_members")
         .values({
@@ -41,8 +43,19 @@ async function createServer(request: Request, userId: number) {
 
     if (!member) throw httpError();
 
-    Object.assign(server, { rooms: [] });
+    // Fetch all servers the user is a member of
+    const servers = await db
+        .selectFrom("servers")
+        .innerJoin("server_members", "servers.id", "server_members.server_id")
+        .where("server_members.user_id", "=", userId)
+        .selectAll("servers")
+        .execute();
+
+    if (!servers.length) throw httpError();
+
+    // Emit event for server creation
     void emitGatewayEvent(`user:${userId}`, "server_create", server as GatewayServer);
 
-    return Response.json(server);
+    // Return all servers the user is a member of
+    return Response.json(servers);
 }

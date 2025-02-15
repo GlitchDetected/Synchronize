@@ -5,6 +5,7 @@ import {
 } from "@react-router/dev/routes";
 
 export default [
+    route("/", "./home/route.tsx"),
     route("login", "./login/route.tsx"),
     route("verify-email", "./verify-email/route.tsx"),
 

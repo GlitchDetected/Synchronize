@@ -39,7 +39,7 @@ async function joinServer(request: Request, code: string) {
     const userId = await auth(via(request));
     if (!userId) throw httpError(HttpErrorMessage.InvalidAuthorization);
 
-    const { data, success, error } = APIPostInviteBodySchema.safeParse(await request.json());
+    const { success, error } = APIPostInviteBodySchema.safeParse(await request.json());
     if (!success) throw httpError(HttpErrorMessage.BadRequest, error);
 
     const { invite, server, rooms } = await db.transaction().execute(async () => {
