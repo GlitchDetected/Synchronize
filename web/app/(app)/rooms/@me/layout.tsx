@@ -1,15 +1,15 @@
 import { Outlet } from "react-router";
 
-import { RoomList } from "~/components/rooms/room-list";
+import { FriendsList } from "~/components/dms/friends-list";
 import { ServerList } from "~/components/rooms/server-list";
 import { CurrentUserPanel } from "~/components/rooms/user-panel";
 
 export default function ServerLayout() {
     return (
-        <div className="flex h-screen w-full max-h-screen overflow-hidden">
+        <div className="flex h-screen w-full max-h-screen">
             <div className="flex relative">
                 <ServerList />
-                <RoomList />
+                <FriendsList/>
                 <CurrentUserPanel />
             </div>
             <Outlet />

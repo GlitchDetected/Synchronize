@@ -85,7 +85,7 @@ function Complete({ hash }: { hash: string; }) {
             return;
         }
 
-        void navigate("/rooms");
+        void navigate("/rooms/@me");
     }
 
     return (<>

@@ -1,3 +1,4 @@
+// room id
 import { MessageInput } from "~/components/rooms/message-input";
 import { MessageView } from "~/components/rooms/message-view";
 

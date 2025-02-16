@@ -48,7 +48,7 @@ AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName;
 
 function UserAvatar({
     id,
-    username = "??",
+    username = ":/",
     className
 }: {
     id: number | null | undefined;
@@ -69,7 +69,7 @@ function UserAvatar({
 
 function ServerIcon({
     id,
-    name = "??",
+    name = "Unknown User",
     className
 }: {
     id: number | null | undefined;

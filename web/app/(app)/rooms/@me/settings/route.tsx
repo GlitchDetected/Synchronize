@@ -13,10 +13,8 @@ export default function Settings() {
         { id: "privacy", label: "Privacy" },
         { id: "notifications", label: "Notifications" },
         { id: "appearance", label: "Appearance" }
-        // Add more settings as needed
     ];
 
-    // Load the theme from localStorage on component mount
     useEffect(() => {
         const savedTheme = localStorage.getItem("theme") || "dark"; // Default to dark if no preference
         setTheme(savedTheme);

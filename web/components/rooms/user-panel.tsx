@@ -10,7 +10,7 @@ export function CurrentUserPanel() {
     const navigate = useNavigate();
 
     const handleSettingsClick = async () => {
-        await navigate("/rooms/settings");
+        await navigate("/rooms/@me/settings");
     };
 
     return (

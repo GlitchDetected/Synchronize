@@ -63,7 +63,7 @@ export default function Login() {
         //     return navigate("/verify-email");
         // }
 
-        void navigate("/rooms");
+        void navigate("/rooms/@me");
     }
 
     return (
