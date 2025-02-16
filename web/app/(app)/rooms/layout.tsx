@@ -1,5 +1,6 @@
 import { Outlet } from "react-router";
 
+import { ServerMembersSidebar } from "~/components/rooms/memberslist";
 import { RoomList } from "~/components/rooms/room-list";
 import { ServerList } from "~/components/rooms/server-list";
 import { CurrentUserPanel } from "~/components/rooms/user-panel";
@@ -12,6 +13,7 @@ export default function ServerLayout() {
                 <RoomList />
                 <CurrentUserPanel />
             </div>
+            <ServerMembersSidebar />
             <Outlet />
         </div>
     );

@@ -29,6 +29,7 @@ export function ServerList() {
     return (
         <div className="w-15 bg-background2 pb-4 h-full">
             <div className="border-r-1 h-full p-2.5 space-y-2">
+                <DirectMessages/>
                 {servers.map((server) =>
                     <Server
                         key={server.id}
@@ -39,6 +40,14 @@ export function ServerList() {
                 <CreateServer />
             </div>
         </div>
+    );
+}
+
+function DirectMessages() {
+    return (
+        <Button>
+            DMs
+        </Button>
     );
 }
 

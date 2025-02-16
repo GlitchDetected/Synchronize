@@ -1,6 +1,7 @@
 import { useMemo, useRef, useState } from "react";
 import { useParams } from "react-router";
 
+import { useCurrentUserStore } from "~/common/users";
 import { request } from "~/lib/api";
 import type { APIPostRoomMessagesResponse } from "~/types/messages";
 
@@ -61,14 +62,13 @@ export function MessageInput() {
     const [inputValue, setInputValue] = useState<string>("");
     const [emojiPickerVisible, setEmojiPickerVisible] = useState<boolean>(false);
     const textarea = useRef<HTMLTextAreaElement | null>(null);
+    const currentUser = useCurrentUserStore();
     const params = useParams();
 
     const options = useMemo(() => [
-        { id: 1, name: "github", type: AutocompleteType.User },
-        { id: 2, name: "pictures", type: AutocompleteType.User },
-        { id: 3, name: "general", type: AutocompleteType.Channel },
-        { id: 4, name: "random", type: AutocompleteType.Channel }
-    ], []);
+        { id: 1, name: currentUser?.username || "", type: AutocompleteType.User },
+        { id: 2, name: "random", type: AutocompleteType.Channel }
+    ], [currentUser?.username]);
 
     const { filteredOptions, focused, onChange, onKeyDown, onSelect, ...props } = useAutocomplete({
         options,
