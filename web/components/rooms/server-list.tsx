@@ -1,6 +1,6 @@
 import { PlusIcon } from "lucide-react";
 import { useEffect } from "react";
-import { Link, useParams } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 
 import { useLastRoomForServerStore } from "~/common/rooms";
 import { useCurrentServer, useServerStore } from "~/common/servers";
@@ -44,8 +44,10 @@ export function ServerList() {
 }
 
 function DirectMessages() {
+    const navigate = useNavigate();
+
     return (
-        <Button>
+        <Button onClick={() => navigate("/rooms/@me")}>
             DMs
         </Button>
     );

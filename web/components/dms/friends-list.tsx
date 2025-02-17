@@ -1,18 +1,45 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 export function FriendsList() {
+    const navigate = useNavigate();
+    const [active, setActive] = useState("friends");
+
     const [friends] = useState([
-        { id: 1, name: "h" },
-        { id: 2, name: "wre" },
-        { id: 3, name: "wreewrdfs" }
+        { id: 1, name: "x" },
+        { id: 2, name: "y" },
+        { id: 3, name: "z" }
     ]);
 
+    const menuItems = [
+        { name: "Friends", path: "/rooms/@me", external: false },
+        { name: "Oxygen", path: "/oxygen", external: true },
+        { name: "GitHub", path: "https://github.com/glitchdetected/synchronize", external: true }
+    ];
+
     return (
-        <div className="w-60 bg-gray-800 p-4 flex flex-col">
-            <div className="flex justify-between items-center mb-4">
-                <button className="text-white text-sm">Friends</button>
-                <button className="text-gray-400 text-sm">Oxygen</button>
-                <button className="text-gray-400 text-sm">GitHub</button>
+        <div className="w-60 bg-neutral-900 p-4 flex flex-col">
+            <div className="w-60 bg-neutral-900 p-4 flex flex-col">
+                <div className="flex flex-col space-y-2">
+                    {menuItems.map((item) => (
+                        <button
+                            key={item.name}
+                            className={`text-sm px-3 py-2 rounded-md transition ${
+                                active === item.name ? "bg-gray-700 text-white" : "text-gray-400 hover:bg-gray-800 hover:text-white"
+                            }`}
+                            onClick={() => {
+                                setActive(item.name);
+                                if (item.external) {
+                                    window.open(item.path, "_blank");
+                                } else {
+                                    void navigate(item.path);
+                                }
+                            }}
+                        >
+                            {item.name}
+                        </button>
+                    ))}
+                </div>
             </div>
 
             <div className="flex-grow overflow-y-auto">

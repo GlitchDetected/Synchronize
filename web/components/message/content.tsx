@@ -5,7 +5,7 @@ const parseMarkdown = (content: string) => {
         `<span class="bg-gradient-to-r from-blue-500 to-indigo-500 text-transparent bg-clip-text">${match}</span>`
     );
 
-    // Handle Discord-style bold (**text**) and italic (*text*)
+    // Handle Synchronize-style bold (**text**) and italic (*text*)
     content = content.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>"); // bold
     content = content.replace(/\*(.*?)\*/g, "<em>$1</em>"); // italic
 

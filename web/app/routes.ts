@@ -6,6 +6,7 @@ import {
 
 export default [
     route("/", "./home/route.tsx"),
+    route("oxygen", "./oxygen/route.tsx"),
     route("login", "./login/route.tsx"),
     route("verify-email", "./verify-email/route.tsx"),
 

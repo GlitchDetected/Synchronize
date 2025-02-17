@@ -7,6 +7,7 @@ import { useCurrentUserStore } from "~/common/users";
 import { CreateInviteModal } from "./create-invite";
 import { CreateRoomModal } from "./create-room";
 import { RoomServerHeader } from "./server/header";
+import { FriendsList } from "../dms/friends-list";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 
@@ -17,7 +18,8 @@ export function RoomList() {
     const params = useParams();
 
     if (!server) {
-        return <div className="w-56 bg-background2" />;
+        return < FriendsList />;
+        // return <div className="w-56 bg-background2" />;
         // redirect("/rooms/@me");
     }
 
