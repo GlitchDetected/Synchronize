@@ -1,6 +1,6 @@
 import { HttpErrorMessage } from "~/constants/http-error";
 import { db } from "~/db";
-import type { GatewayServer } from "~/types/server";
+import type { APIGetServersResponse, GatewayServer } from "~/types/server";
 import { APIPostServersBodySchema } from "~/types/server";
 import { defineEndpoint, defineEndpointOptions } from "~/utils/define/endpoint";
 import { emitGatewayEvent } from "~/utils/emit-event";
@@ -12,8 +12,47 @@ const options = defineEndpointOptions({
 
 export default defineEndpoint(async ({ request, userId }) => {
     if (request.method === "POST") return createServer(request, userId);
+    if (request.method === "GET") return getServers(userId);
     httpError(HttpErrorMessage.NotFound);
 }, options);
+
+async function getServers(userId: number) {
+    console.log("Fetching servers for user:", userId);
+
+    // Fetch all servers where the user is a member
+    const servers: APIGetServersResponse = await db
+        .selectFrom("servers")
+        .innerJoin("server_members", "server_members.server_id", "servers.id")
+        .where("server_members.user_id", "=", userId)
+        .select([
+            "servers.id",
+            "servers.name",
+            "servers.flags",
+            "servers.owner_id",
+            "servers.icon_id",
+            "servers.banner_id",
+            "servers.created_at"
+        ])
+        .execute();
+
+    if (!servers.length) return Response.json([]);
+
+    // Fetch rooms for the retrieved servers
+    const serverIds = servers.map((s) => s.id);
+    const rooms = await db
+        .selectFrom("rooms")
+        .where("server_id", "in", serverIds)
+        .selectAll()
+        .execute();
+
+    // Map rooms to their respective servers
+    const serversWithRooms: GatewayServer[] = servers.map((server) => ({
+        ...server,
+        rooms: rooms.filter((room) => room.server_id === server.id)
+    }));
+
+    return Response.json(serversWithRooms);
+}
 
 async function createServer(request: Request, userId: number) {
     const { data, success, error } = APIPostServersBodySchema.safeParse(await request.json());

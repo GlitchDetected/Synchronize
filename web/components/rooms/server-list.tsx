@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router";
 
 import { useLastRoomForServerStore } from "~/common/rooms";
-import { useCurrentServer, useServerStore } from "~/common/servers";
+import { fetchServers, useCurrentServer, useServerStore } from "~/common/servers";
 import type { Server } from "~/types/server";
 
 import { CreateServerModal } from "./create-server";
@@ -15,6 +15,10 @@ export function ServerList() {
     const lastRoom = useLastRoomForServerStore();
     const server = useCurrentServer();
     const params = useParams();
+
+    useEffect(() => {
+        void fetchServers();
+    }, []);
 
     useEffect(
         () => {

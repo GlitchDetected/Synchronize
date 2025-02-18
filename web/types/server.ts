@@ -23,10 +23,13 @@ export interface GatewayServer extends Server {
     rooms: Room[];
 }
 
-// POST /servers
+// POST /api/servers
 export const APIPostServersBodySchema = z.object({
     name: z.string().min(1).max(64)
 });
 
 export type APIPostServersBody = z.infer<typeof APIPostServersBodySchema>;
 export type APIPostServersResponse = Server;
+
+// GET /api/servers
+export type APIGetServersResponse = Server[];
