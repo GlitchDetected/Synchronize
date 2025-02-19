@@ -35,7 +35,6 @@ export const HttpErrorMessage = {
     UsernameAlreadyClaimed: "Username already claimed",
     EmailAlreadyRegistered: "An account with this email is already registered",
     EmailOrPasswordIncorrect: "Email or password is incorrect",
-    UserIsAlreadyAMember: "User is already a member",
 
     // unknown object - 10xxx
     UnknownAccount: "Unknown account",

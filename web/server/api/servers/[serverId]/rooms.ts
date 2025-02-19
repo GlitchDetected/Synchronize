@@ -1,6 +1,6 @@
 import { HttpErrorMessage } from "~/constants/http-error";
 import { db } from "~/db";
-import { APIGetRoomQuerySchema, APIPostServerRoomsBodySchema } from "~/types/rooms";
+import { APIPostServerRoomsBodySchema } from "~/types/rooms";
 import { defineEndpoint, defineEndpointOptions } from "~/utils/define/endpoint";
 import { emitGatewayEvent } from "~/utils/emit-event";
 import { httpError } from "~/utils/http-error";
@@ -15,16 +15,11 @@ const options = defineEndpointOptions({
 
 export default defineEndpoint(async ({ request, server }) => {
     if (request.method === "POST") return createRoom(request, server.id);
-    if (request.method === "GET") return getRooms(request, server.id);
+    if (request.method === "GET") return getRooms(server.id);
     httpError(HttpErrorMessage.NotFound);
 }, options);
 
-async function getRooms(request: Request, serverId: number) {
-    const url = new URL(request.url);
-    const searchParams = Object.fromEntries(url.searchParams);
-
-    const { success, error } = APIGetRoomQuerySchema.safeParse(searchParams);
-    if (!success) throw httpError(HttpErrorMessage.BadRequest, error);
+async function getRooms(serverId: number) {
 
     const rooms = await db
         .selectFrom("rooms")

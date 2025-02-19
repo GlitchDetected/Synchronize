@@ -19,17 +19,16 @@ export default function Settings() {
     ];
 
     useEffect(() => {
-        const savedTheme = localStorage.getItem("theme") || "dark"; // Default to dark if no preference
+        const savedTheme = localStorage.getItem("theme") || "dark";
         setTheme(savedTheme);
-        document.documentElement.setAttribute("data-theme", savedTheme); // Apply the theme to the document
+        document.documentElement.setAttribute("data-theme", savedTheme);
     }, []);
 
-    // Toggle between dark and light mode
     const toggleTheme = () => {
         const newTheme = theme === "dark" ? "light" : "dark";
         setTheme(newTheme);
-        localStorage.setItem("theme", newTheme); // Save the theme to localStorage
-        document.documentElement.setAttribute("data-theme", newTheme); // Apply the theme
+        localStorage.setItem("theme", newTheme);
+        document.documentElement.setAttribute("data-theme", newTheme);
     };
 
     const handleSignout = async () => {

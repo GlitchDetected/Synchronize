@@ -1,13 +1,16 @@
 import { HashIcon, PlusIcon, UserRoundPlusIcon } from "lucide-react";
+import { useEffect } from "react";
 import { Link, useParams } from "react-router";
 
+import { useRoomStore } from "~/common/rooms";
 import { useCurrentServer, useCurrentServerRooms } from "~/common/servers";
 import { useCurrentUserStore } from "~/common/users";
+import type { Room } from "~/types/rooms";
 
 import { CreateInviteModal } from "./create-invite";
 import { CreateRoomModal } from "./create-room";
+import { FriendsList } from "./friends-list";
 import { RoomServerHeader } from "./server/header";
-import { FriendsList } from "../dms/friends-list";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 
@@ -17,9 +20,29 @@ export function RoomList() {
     const params = useParams();
     const rooms = useCurrentServerRooms();
 
+    useEffect(() => {
+        const fetchRoomsData = async () => {
+            if (!server) return;
+
+            try {
+                const response = await fetch(`/api/servers/${server.id}/rooms`);
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch rooms: ${response.status} ${response.statusText}`);
+                }
+
+                const room: Room[] = await response.json();
+                useRoomStore.getState().set(room);
+            } catch (error) {
+                console.error("Error fetching rooms:", error);
+            }
+        };
+
+        void fetchRoomsData();
+    }, [server]);
+
+
     if (!server) {
-        return < FriendsList />;
-        // return <div className="w-56 bg-background2" />;
+        return < FriendsList/>;
         // redirect("/rooms/@me");
     }
 

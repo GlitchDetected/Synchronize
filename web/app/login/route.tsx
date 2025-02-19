@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 
@@ -12,7 +12,7 @@ import { Config } from "~/constants/config";
 import { request } from "~/lib/api";
 import type { ApiError } from "~/types";
 import type { APIPostAuthLoginResponse, APIPostAuthRegisterBody, APIPostAuthRegisterResponse } from "~/types/auth";
-import { APIPostAuthLoginBodySchema, APIPostAuthRegisterBodySchema, UserAuthRequiredAction } from "~/types/auth";
+import { APIPostAuthLoginBodySchema, APIPostAuthRegisterBodySchema } from "~/types/auth";
 
 enum Type {
     Login = "login",
@@ -27,7 +27,27 @@ const fields = [
 
 export default function Login() {
     const [type, setType] = useState<Type>(Type.Login);
+    const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        async function checkAuth() {
+            try {
+                const res = await request<{ authenticated: boolean; }>("get", "/auth/sessions");
+
+                if ("authenticated" in res && res.authenticated) {
+                    void navigate("/rooms/@me");
+                }
+            } catch (error) {
+                console.error("Error checking authentication:", error);
+            } finally {
+                setIsLoading(false);
+            }
+        }
+
+        void checkAuth();
+    }, [navigate]);
+
 
     const form = useForm<APIPostAuthRegisterBody>({
         resolver: zodResolver(

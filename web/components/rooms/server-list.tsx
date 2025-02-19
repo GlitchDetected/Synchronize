@@ -1,5 +1,5 @@
-import { PlusIcon } from "lucide-react";
-import { useEffect } from "react";
+import { LoaderCircleIcon, PlusIcon } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
 
 import { useLastRoomForServerStore } from "~/common/rooms";
@@ -15,9 +15,15 @@ export function ServerList() {
     const lastRoom = useLastRoomForServerStore();
     const server = useCurrentServer();
     const params = useParams();
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        void fetchServers();
+        async function loadServers() {
+            setLoading(true);
+            await fetchServers();
+            setLoading(false);
+        }
+        void loadServers();
     }, []);
 
     useEffect(
@@ -30,16 +36,23 @@ export function ServerList() {
         [params]
     );
 
+
     return (
         <div className="w-15 bg-background2 pb-4 h-full">
             <div className="border-r-1 h-full p-2.5 space-y-2">
                 <DirectMessages/>
-                {servers.map((server) =>
-                    <Server
-                        key={server.id}
-                        server={server}
-                        lastRoomId={lastRoom[server.id]}
-                    />
+                {loading ? (
+                    <div className="flex justify-center items-center h-16">
+                        <LoaderCircleIcon className="animate-spin text-gray-400" size={24} />
+                    </div>
+                ) : (
+                    servers.map((server) => (
+                        <Server
+                            key={server.id}
+                            server={server}
+                            lastRoomId={lastRoom[server.id]}
+                        />
+                    ))
                 )}
                 <CreateServer />
             </div>
@@ -51,7 +64,7 @@ function DirectMessages() {
     const navigate = useNavigate();
 
     return (
-        <Button onClick={() => navigate("/rooms/@me")}>
+        <Button onClick={() => navigate("/rooms/@me")} className="text-white">
             DMs
         </Button>
     );
