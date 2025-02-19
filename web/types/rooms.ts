@@ -31,3 +31,11 @@ export const APIPostServerRoomsBodySchema = z.object({
 
 export type APIPostServerRoomsBody = z.infer<typeof APIPostServerRoomsBodySchema>;
 export type APIPostServerRoomsResponse = Room;
+
+export const APIGetRoomQuerySchema = z.object({
+    limit: z.string().regex(/^(([1-9][0-9]?)|100)$/).default("50").transform((str) => Number(str)),
+    before: z.string().regex(/^\d*$/).default("999999999").transform((str) => Number(str))
+});
+
+export type APIGetRoomQuery = z.infer<typeof APIGetRoomQuerySchema>;
+export type APIGetRoomResponse = Room[];

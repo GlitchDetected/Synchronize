@@ -1,6 +1,6 @@
 import { HttpErrorMessage } from "~/constants/http-error";
 import { db } from "~/db";
-import type { APIGetServersResponse, GatewayServer } from "~/types/server";
+import type { GatewayServer } from "~/types/server";
 import { APIPostServersBodySchema } from "~/types/server";
 import { defineEndpoint, defineEndpointOptions } from "~/utils/define/endpoint";
 import { emitGatewayEvent } from "~/utils/emit-event";
@@ -17,10 +17,8 @@ export default defineEndpoint(async ({ request, userId }) => {
 }, options);
 
 async function getServers(userId: number) {
-    console.log("Fetching servers for user:", userId);
 
-    // Fetch all servers where the user is a member
-    const servers: APIGetServersResponse = await db
+    const servers = await db
         .selectFrom("servers")
         .innerJoin("server_members", "server_members.server_id", "servers.id")
         .where("server_members.user_id", "=", userId)
@@ -35,23 +33,7 @@ async function getServers(userId: number) {
         ])
         .execute();
 
-    if (!servers.length) return Response.json([]);
-
-    // Fetch rooms for the retrieved servers
-    const serverIds = servers.map((s) => s.id);
-    const rooms = await db
-        .selectFrom("rooms")
-        .where("server_id", "in", serverIds)
-        .selectAll()
-        .execute();
-
-    // Map rooms to their respective servers
-    const serversWithRooms: GatewayServer[] = servers.map((server) => ({
-        ...server,
-        rooms: rooms.filter((room) => room.server_id === server.id)
-    }));
-
-    return Response.json(serversWithRooms);
+    return Response.json(servers);
 }
 
 async function createServer(request: Request, userId: number) {

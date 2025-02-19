@@ -13,9 +13,9 @@ import { Separator } from "../ui/separator";
 
 export function RoomList() {
     const server = useCurrentServer();
-    const rooms = useCurrentServerRooms();
     const currentUser = useCurrentUserStore();
     const params = useParams();
+    const rooms = useCurrentServerRooms();
 
     if (!server) {
         return < FriendsList />;

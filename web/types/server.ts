@@ -32,4 +32,7 @@ export type APIPostServersBody = z.infer<typeof APIPostServersBodySchema>;
 export type APIPostServersResponse = Server;
 
 // GET /api/servers
+export const APIGetServersQuerySchema = z.object({});
+
+export type APIGetServersQuery = z.infer<typeof APIGetServersQuerySchema>;
 export type APIGetServersResponse = Server[];

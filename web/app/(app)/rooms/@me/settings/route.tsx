@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 
 import { useCurrentUserStore } from "~/common/users";
 import { UserAvatar } from "~/components/ui/avatar";
@@ -7,12 +8,14 @@ export default function Settings() {
     const currentUser = useCurrentUserStore();
     const [selectedSetting, setSelectedSetting] = useState<string>("general");
     const [theme, setTheme] = useState<string>("dark");
+    const navigate = useNavigate();
 
     const settings = [
         { id: "general", label: "General" },
         { id: "privacy", label: "Privacy" },
         { id: "notifications", label: "Notifications" },
-        { id: "appearance", label: "Appearance" }
+        { id: "appearance", label: "Appearance" },
+        { id: "signout", label: "Sign out" }
     ];
 
     useEffect(() => {
@@ -29,6 +32,25 @@ export default function Settings() {
         document.documentElement.setAttribute("data-theme", newTheme); // Apply the theme
     };
 
+    const handleSignout = async () => {
+
+        try {
+            const response = await fetch("/api/auth/signout", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+            if (response.ok) {
+                void navigate("/login");
+            } else {
+                console.error("Failed to sign out");
+            }
+        } catch (error) {
+            console.error("Error signing out", error);
+        }
+    };
+
     return (
         <div className="flex w-full h-screen bg-background">
             {/* Sidebar */}
@@ -43,7 +65,7 @@ export default function Settings() {
                                     ? "bg-primary text-primary-foreground"
                                     : "text-muted-foreground hover:bg-muted"
                             }`}
-                            onClick={() => setSelectedSetting(setting.id)}
+                            onClick={() => setting.id === "signout" ? handleSignout() : setSelectedSetting(setting.id)}
                         >
                             {setting.label}
                         </li>
@@ -83,7 +105,7 @@ export default function Settings() {
                                 </button>
                             </div>
                         )}
-                        {selectedSetting !== "appearance" && (
+                        {selectedSetting !== "appearance" && selectedSetting !== "signout" && (
                             <p className="text-muted-foreground">Configure your {selectedSetting} settings here.</p>
                         )}
                     </div>
