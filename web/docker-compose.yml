@@ -5,4 +5,4 @@ services:
     image: synchronize-web
     restart: unless-stopped
     ports:
-      - "7000:5173"
+      - "5173:5173"
