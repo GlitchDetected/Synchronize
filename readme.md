@@ -91,6 +91,7 @@ See the [open issues](https://github.com/GlitchDetected/Synchronize/issues) for 
 
 To build and run
 
+`./web`
 ```
 cd web
 npm run build
@@ -100,6 +101,18 @@ or
 ```
 cd web
 docker build -t synchronize-web .
+docker-compose up -d
+```
+
+`./gateway`
+```
+cd gateway
+go run main.go
+```
+or
+```
+cd gateway
+docker build -t synchronize-gateway .
 docker-compose up -d
 ```
 
