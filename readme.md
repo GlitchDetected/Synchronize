@@ -99,8 +99,8 @@ npm run start
 or
 ```
 cd web
-docker build -t synchronize .
-docker compose up -d
+docker build -t synchronize-web .
+docker-compose up -d
 ```
 
 ## Contributing

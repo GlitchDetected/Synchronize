@@ -28,4 +28,4 @@ class JWTManager<T extends object> {
 }
 
 export const session = new JWTManager<UserJWTPayload>(secret + "session", "365D");
-// export const verifyemail = new JWTManager<UserEmailVerifyJWTPayload>(secret + "verifyemail", "1D");
+export const verifyemail = new JWTManager<UserEmailVerifyJWTPayload>(secret + "verifyemail", "1D");
