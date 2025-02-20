@@ -1,6 +1,14 @@
 FROM node:lts
 WORKDIR /app
-COPY . .
+
+COPY package.json package-lock.json ./
+
 RUN npm i --legacy-peer-deps
-CMD ["npm", "run", "dev"]
-EXPOSE 9999
+
+COPY . .
+
+RUN npm run build
+
+EXPOSE 5173
+
+CMD ["npm", "run", "start"]
