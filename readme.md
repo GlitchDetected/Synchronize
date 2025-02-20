@@ -116,6 +116,10 @@ docker build -t synchronize-gateway .
 docker-compose up -d
 ```
 
+```
+docker-compose down
+```
+
 ## Contributing
 
 Contributions is what makes the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**!
