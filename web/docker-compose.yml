@@ -1,0 +1,8 @@
+version: '3'
+services:
+  tts:
+    container_name: synchronize-web
+    image: synchronize-web
+    restart: unless-stopped
+    ports:
+      - "7000:9999"

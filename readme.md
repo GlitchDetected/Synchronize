@@ -87,6 +87,22 @@ See the [open issues](https://github.com/GlitchDetected/Synchronize/issues) for 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+## Deploy
+
+To build and run
+
+```
+cd web
+npm run build
+npm run start
+```
+or
+```
+cd web
+docker build -t synchronize .
+docker compose up -d
+```
+
 ## Contributing
 
 Contributions is what makes the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**!
