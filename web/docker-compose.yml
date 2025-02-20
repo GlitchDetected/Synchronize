@@ -1,8 +1,7 @@
-version: '3'
 services:
   tts:
     container_name: synchronize-web
     image: synchronize-web
     restart: unless-stopped
     ports:
-      - "5173:5173"
+      - "3010:3010"

@@ -101,7 +101,7 @@ or
 ```
 cd web
 docker build -t synchronize-web .
-docker-compose up -d
+docker compose up -d
 ```
 
 `./gateway`
@@ -113,7 +113,7 @@ or
 ```
 cd gateway
 docker build -t synchronize-gateway .
-docker-compose up -d
+docker compose up -d
 ```
 
 ```

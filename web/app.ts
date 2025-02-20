@@ -15,3 +15,4 @@ server.use(
 const handler = handle(build, server, { getLoadContext });
 
 serve({ fetch: handler.fetch, port: 3_010 });
+// listens at port 3010
