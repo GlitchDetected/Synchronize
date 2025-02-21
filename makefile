@@ -50,6 +50,10 @@ check-env-web:
 		echo 'connectionstring="postgresql://postgres:passwordforyourdb@yourhost:5432/databasename"' >> $(WEB_ENV); \
 		echo 'CAPTCHA_SECRET="somesecretkey"' >> $(WEB_ENV); \
 		echo 'redisconnectionstring="redis://redisusername:thepassword@yourredishost:50952"' >> $(WEB_ENV); \
+		echo 'BASE_URL=http://localhost:5173' >> $(WEB_ENV); \
+		echo 'GATEWAY_URL=ws://localhost:8080' >> $(WEB_ENV); \
+		echo 'CDN_URL=cdn.yourdomain.com' >> $(WEB_ENV); \
+		echo 'EMAIL_DOMAIN=youremail@domain.com' >> $(WEB_ENV); \
 	fi
 	@echo "env exists in ./web"
 

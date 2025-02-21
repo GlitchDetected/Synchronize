@@ -81,6 +81,11 @@ CAPTCHA_SECRET="somesecretkey"
 # get captcha secret at https://www.cloudflare.com/application-services/products/turnstile/
 
 redisconnectionstring="redis://redisusername:thepassword@yourredishost:50952"
+
+BASE_URL=http://localhost:5173
+GATEWAY_URL=ws://localhost:8080
+CDN_URL=cdn.domain.com
+EMAIL_DOMAIN=youremail@domain.com
 ```
 
 See the [open issues](https://github.com/GlitchDetected/Synchronize/issues) for a full list of proposed features (and known issues).
@@ -116,8 +121,18 @@ docker build -t synchronize-gateway .
 docker compose up -d
 ```
 
+## Updating
 ```
 docker-compose down
+sudo git pull
+
+docker build -t synchronize-web .
+docker compose up -d
+
+# or
+
+docker build -t synchronize-gateway .
+docker compose up -d
 ```
 
 ## Contributing
