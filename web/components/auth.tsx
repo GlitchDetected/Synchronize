@@ -4,6 +4,11 @@ export function Auth({ children }: { children: React.ReactNode; }) {
             <div className="size-full min-w-96 rounded-lg border border-muted bg-background/80 p-6 backdrop-blur-md sm:size-fit sm:max-w-96">
                 {children}
             </div>
+            <footer className="absolute bottom-4 right-4 text-sm text-gray-500 hover:underline">
+                <a href="https://unsplash.com/photos/vintage-gray-game-console-and-joystick-p0j-mE6mGo4" target="_blank" rel="noopener noreferrer">
+                    @unsplash
+                </a>
+            </footer>
         </div>
     );
 }
