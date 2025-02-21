@@ -1,5 +1,6 @@
 services:
-  tts:
+  synchronizegw:
+    env_file: .env
     container_name: synchronize-gateway
     image: synchronize-gateway
     restart: unless-stopped

@@ -1,5 +1,6 @@
 services:
-  tts:
+  synchronizeweb:
+    env_file: .env
     container_name: synchronize-web
     image: synchronize-web
     restart: unless-stopped

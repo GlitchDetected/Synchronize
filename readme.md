@@ -31,6 +31,8 @@ Core Philosophy
     </li>
     <li>
       <a href="#setup">Setup</a>
+      <a href="#deploy">Deploy</a>
+      <a href="#updating">Updating</a>
     </li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
@@ -123,7 +125,7 @@ docker compose up -d
 
 ## Updating
 ```
-docker-compose down
+docker compose down
 sudo git pull
 
 docker build -t synchronize-web .
