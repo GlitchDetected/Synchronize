@@ -83,11 +83,6 @@ CAPTCHA_SECRET="somesecretkey"
 # get captcha secret at https://www.cloudflare.com/application-services/products/turnstile/
 
 redisconnectionstring="redis://redisusername:thepassword@yourredishost:50952"
-
-VITE_BASE_URL=http://localhost:5173
-VITE_GATEWAY_URL=ws://localhost:8080
-VITE_CDN_URL=cdn.domain.com
-VITE_EMAIL_DOMAIN=youremail@domain.com
 ```
 
 See the [open issues](https://github.com/GlitchDetected/Synchronize/issues) for a full list of proposed features (and known issues).
