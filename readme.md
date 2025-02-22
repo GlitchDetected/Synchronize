@@ -47,43 +47,40 @@ Core Philosophy
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## setup
-For the setup, you can run make to automate (faster approach) or manually run the commands below
+For the setup, you can run `make` to automate (faster approach) or manually run the commands below
+
+** using make **
 `makefile`
 - make gateway
 - make web
 
+** manually do it **
 `./gateway`
 - create a .env file in `./gateway`
-- install go @ https://go.dev/doc/install
-- go run main.go
-
 ```env
 SECRET="somerandomsecret12345"
 REDIS_ADDR="redishost:6379"
 REDIS_PASSWORD="redispassword"
 PGCONNECTIONSTRING="postgresql://postgres:passwordforyourdb@yourhost:5432/databasename"
 ```
+- install go @ https://go.dev/doc/install
+- go run main.go
 
----------
 `./web`
 - install nodejs @ https://nodejs.org/en/download
 - create a .env file in `./web`
-- npm install
-- npm run dev
-- open http://localhost:5173/login in your browser
-
 ```env
 SECRET="somerandomsecret12345"
-
 RESEND_API_SECRET="resendapisecretkeyhere"
-
 connectionstring="postgresql://postgres:passwordforyourdb@yourhost:5432/databasename"
-
 CAPTCHA_SECRET="somesecretkey" 
 # get captcha secret at https://www.cloudflare.com/application-services/products/turnstile/
-
 redisconnectionstring="redis://redisusername:thepassword@yourredishost:50952"
 ```
+- make sure that you have pnpm installed already, if not, use `npm i -g pnpm`
+- install deps using `pnpm install`
+- run in development mode using `pnpm dev` or if you want to deploy it use `pnpm build` then `pnpm start`
+- runs on http://localhost:5173/login in `development` and http://localhost:3010/login in `production`
 
 See the [open issues](https://github.com/GlitchDetected/Synchronize/issues) for a full list of proposed features (and known issues).
 
@@ -96,22 +93,21 @@ To build and run
 `./web`
 ```
 cd web
-npm run build
-npm run start
+pnpm build
+pnpm start
 ```
-or
-```
-cd web
-docker build -t synchronize-web .
-docker compose up -d
-```
-
 `./gateway`
 ```
 cd gateway
 go run main.go
 ```
-or
+
+or if you prefer Docker
+```
+cd web
+docker build -t synchronize-web .
+docker compose up -d
+```
 ```
 cd gateway
 docker build -t synchronize-gateway .
@@ -166,6 +162,7 @@ Distributed under the Unlicense License. See `LICENSE.txt` for more information.
 - https://www.postgresql.org/download/macosx/
 - https://postgresapp.com/
 - https://redis.io/docs/latest/operate/oss_and_stack/install/install-redis/install-redis-on-mac-os/
+- https://nodejs.org/en/download
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

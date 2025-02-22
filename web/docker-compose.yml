@@ -1,8 +1,8 @@
 services:
-  synchronizeweb:
+  synchronize-web:
     env_file: .env
     container_name: synchronize-web
     image: synchronize-web
     restart: unless-stopped
     ports:
-      - "3010:3010"
+      - "9900:3010"

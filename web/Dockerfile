@@ -1,14 +1,16 @@
 FROM node:latest
 WORKDIR /app
 
-COPY package.json package-lock.json ./
+COPY package.json pnpm-lock.yaml ./
 
-RUN npm i --legacy-peer-deps
+RUN npm install -g pnpm
+
+RUN pnpm install
 
 COPY . .
 
-RUN npm run build
+RUN pnpm run build
 
 EXPOSE 3010
 
-CMD ["npm", "run", "start"]
+CMD ["pnpm", "run", "start"]

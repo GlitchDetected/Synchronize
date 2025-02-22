@@ -50,23 +50,18 @@ check-env-web:
 		echo 'connectionstring="postgresql://postgres:passwordforyourdb@yourhost:5432/databasename"' >> $(WEB_ENV); \
 		echo 'CAPTCHA_SECRET="somesecretkey"' >> $(WEB_ENV); \
 		echo 'redisconnectionstring="redis://redisusername:thepassword@yourredishost:50952"' >> $(WEB_ENV); \
-		echo 'VITE_BASE_URL=http://localhost:5173' >> $(WEB_ENV); \
-		echo 'VITE_GATEWAY_URL=ws://localhost:8080' >> $(WEB_ENV); \
-		echo 'VITE_CDN_URL=cdn.yourdomain.com' >> $(WEB_ENV); \
-		echo 'VITE_EMAIL_DOMAIN=youremail@domain.com' >> $(WEB_ENV); \
 	fi
 	@echo "env exists in ./web"
 
 gateway: install-go check-env-gateway
-	@echo "Running gateway service..."
+	@echo "Running gateway service"
 	cd $(GATEWAY_DIR) && go run main.go
 
 web: install-node check-env-web
-	@echo "Installing dependencies for web..."
-	cd $(WEB_DIR) && npm install --legacy-peer-deps
-	@echo "Starting web application..."
-	cd $(WEB_DIR) && npm run dev
-	@echo "Opening web app in browser..."
+	@echo "Installing dependencies for synchronize-web"
+	cd $(WEB_DIR) && npm i -g pnpm
+	cd $(WEB_DIR) && pnpm install
+	cd $(WEB_DIR) && pnpm dev
 	xdg-open http://localhost:5173/login || open http://localhost:5173/login || start http://localhost:5173/login
 
 all: gateway web
