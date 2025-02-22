@@ -27,7 +27,7 @@ const fields = [
 
 export default function Login() {
     const [type, setType] = useState<Type>(Type.Login);
-    const [isLoading, setIsLoading] = useState(true);
+    const [setLoading] = useState(true);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -41,7 +41,7 @@ export default function Login() {
             } catch (error) {
                 console.error("Error checking authentication:", error);
             } finally {
-                setIsLoading(false);
+                void setLoading(false);
             }
         }
 
