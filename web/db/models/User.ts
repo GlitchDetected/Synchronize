@@ -11,6 +11,9 @@ class User extends Model {
     declare flags: number;
     declare avatar_id: number;
     declare banner_id: number;
+    declare aboutme: string;
+    declare pronouns: string;
+    declare apptheme: string;
 
     declare readonly created_at: Date;
 }
@@ -52,6 +55,19 @@ User.init(
         banner_id: {
             type: DataTypes.INTEGER,
             allowNull: true
+        },
+        aboutme: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        pronouns: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        apptheme: {
+            type: DataTypes.STRING,
+            allowNull: true,
+            defaultValue: "dark"
         },
         created_at: {
             type: DataTypes.DATE,

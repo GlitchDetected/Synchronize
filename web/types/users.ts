@@ -15,6 +15,10 @@ export interface UserTable {
     avatar_id: number | null;
     banner_id: number | null;
 
+    aboutme: string | null;
+    pronouns: string | null;
+    apptheme: string | null;
+
     created_at: ColumnType<string, string | undefined, never>;
 }
 

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { Context } from "hono";
 import { Hono } from "hono";
 import { jsonObjectFrom } from "kysely/helpers/postgres";
@@ -179,7 +178,7 @@ await (async () => {
         console.clear();
 
         console.log("Testing database connection...");
-        await sequelize.authenticate(); // Ensure database connection works
+        await sequelize.authenticate();
         console.log("Database connection successful. Initializing models...");
 
         Object.keys(models).forEach((ele) => {

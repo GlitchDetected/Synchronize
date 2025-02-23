@@ -40,7 +40,7 @@ async function getMessages(request: Request, roomId: number) {
                 eb
                     .selectFrom("users")
                     .whereRef("messages.author_id", "=", "users.id")
-                    .select(["id", "username", "nickname", "flags", "created_at", "banner_id", "avatar_id"])
+                    .select(["id", "username", "nickname", "flags", "created_at", "banner_id", "avatar_id", "aboutme", "pronouns", "apptheme"])
             )
                 .as("author")
         ])
@@ -72,7 +72,7 @@ async function createMessage(request: Request, userId: number, serverId: number,
 
         const author = await trx
             .selectFrom("users")
-            .select(["id", "username", "nickname", "flags", "created_at", "banner_id", "avatar_id"])
+            .select(["id", "username", "nickname", "flags", "created_at", "banner_id", "avatar_id", "aboutme", "pronouns", "apptheme"])
             .executeTakeFirst();
 
         Object.assign(message, { author });

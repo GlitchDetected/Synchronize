@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import type { LinksFunction } from "react-router";
 import {
     Links,
@@ -26,8 +27,36 @@ export const links: LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode; }) {
+    const [theme, setTheme] = useState("dark");
+
+    useEffect(() => {
+        const fetchTheme = async () => {
+            try {
+                const response = await fetch("/api/users/@me/", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                });
+                if (response.ok) {
+                    const userData = await response.json();
+                    const savedTheme = userData.apptheme;
+                    setTheme(savedTheme);
+                    document.documentElement.classList.remove("light", "dark");
+                    document.documentElement.classList.add(savedTheme);
+                } else {
+                    console.error("Failed to fetch user data");
+                }
+            } catch (error) {
+                console.error("Error fetching user data:", error);
+            }
+        };
+
+        void fetchTheme();
+    }, []);
+
     return (
-        <html lang="en" className="dark">
+        <html lang="en" className={theme}>
             <head>
                 <meta charSet="utf-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />

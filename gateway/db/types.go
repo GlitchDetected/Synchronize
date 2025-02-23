@@ -16,6 +16,10 @@ type UserTable struct {
 	AvatarId *int `json:"avatar_id"`
 	BannerId *int `json:"banner_id"`
 
+	AboutMe  *string `json:"aboutme"`
+	Pronouns *string `json:"pronouns"`
+	AppTheme *string `json:"apptheme"`
+
 	CreatedAt time.Time `json:"created_at"`
 }
 

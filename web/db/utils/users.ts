@@ -8,6 +8,15 @@ export function getUser(id: number) {
         .executeTakeFirst();
 }
 
+export async function updateUser(id: number, data: Partial<{ username: string; email: string; nickname: string; }>) {
+    return db
+        .updateTable("users")
+        .set(data)
+        .where("id", "=", id)
+        .returningAll()
+        .executeTakeFirst();
+}
+
 export async function getUserIdByUsername(username: string) {
     const user = await db
         .selectFrom("users")
