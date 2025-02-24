@@ -5,7 +5,6 @@ import { BitfieldManager } from "../bitfields";
 
 // not sure if there is a better way...
 export function makePublicUser(user: User): PublicUser {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password_hash, flags, ...publicUser } = user;
 
     const bitfield = new BitfieldManager(flags);

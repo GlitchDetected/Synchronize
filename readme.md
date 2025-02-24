@@ -41,7 +41,8 @@ Core Philosophy
 
 ### Built With
 
-* [![Next][Next.js]][Next-url]
+* [![Rust][Rust]][Rust-url]
+* [![Go][Go]][Go-url]
 * [![React][React.js]][React-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -181,3 +182,7 @@ Distributed under the Unlicense License. See `LICENSE.txt` for more information.
 [Next-url]: https://nextjs.org/
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
+[Go]: https://img.shields.io/badge/Go-20232A?style=for-the-badge&logo=go&logoColor=61DAFB
+[Go-url]: https://go.dev/
+[Rust]: https://img.shields.io/badge/rust-20232A?style=for-the-badge&logo=rust&logoColor=FFA500
+[Rust-url]: https://www.rust-lang.org/

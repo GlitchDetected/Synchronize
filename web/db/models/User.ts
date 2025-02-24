@@ -58,11 +58,13 @@ User.init(
         },
         aboutme: {
             type: DataTypes.STRING,
-            allowNull: true
+            allowNull: true,
+            defaultValue: "no bio :("
         },
         pronouns: {
             type: DataTypes.STRING,
-            allowNull: true
+            allowNull: true,
+            defaultValue: "_/_"
         },
         apptheme: {
             type: DataTypes.STRING,
