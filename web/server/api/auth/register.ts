@@ -29,7 +29,7 @@ async function createUser(request: Request) {
             password_hash: await hashPassword(data.password),
             username: data.username
         })
-        .returning(["id", "username", "email", "flags"])
+        .returning(["id", "username", "email", "flags", "aboutme", "pronouns", "apptheme"])
         .executeTakeFirst();
 
     if (!user) throw httpError();
