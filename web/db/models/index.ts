@@ -5,4 +5,7 @@ import Server from "./Server";
 import ServerMembers from "./ServerMembers";
 import User from "./User";
 
-export default { Invite, Messages, Room, Server, ServerMembers, User };
+const models = { Invite, Messages, Room, Server, ServerMembers, User };
+
+export type ModelsMap = typeof models;
+export default models;

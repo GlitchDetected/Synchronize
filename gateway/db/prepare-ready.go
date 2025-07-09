@@ -3,13 +3,14 @@ package db
 import (
 	"context"
 	"fmt"
-    "os"
+	"os"
+
 	"github.com/georgysavva/scany/v2/pgxscan"
 	"github.com/jackc/pgx/v5/pgxpool"
 	_ "github.com/joho/godotenv/autoload"
 )
 
-var db, _ = pgxpool.New(context.Background(), os.Getenv("PGCONNECTIONSTRING"))
+var db, _ = pgxpool.New(context.Background(), os.Getenv("pgconnectionstring"))
 
 func GetUser(userId int) (UserTable, error) {
 	var user UserTable

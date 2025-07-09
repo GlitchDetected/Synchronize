@@ -8,5 +8,5 @@ export const Config = {
     base_url: "http://localhost:5173",
     gateway_url: "ws://localhost:8080",
     cdn_url: "https://cloudflare.com",
-    email_domain: "somerandomemail12356@gmail.com"
+    email_domain: "random@example.com"
 };

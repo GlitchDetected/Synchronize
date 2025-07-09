@@ -5,15 +5,15 @@ import { sequelize } from "~/db";
 class User extends Model {
     declare id: number;
     declare email: string;
-    declare password_hash: number;
+    declare password_hash: string;
     declare username: string;
     declare nickname: string;
     declare flags: number;
     declare avatar_id: number;
     declare banner_id: number;
-    declare aboutme: string;
-    declare pronouns: string;
-    declare apptheme: string;
+    declare aboutme: string | null;
+    declare pronouns: string | null;
+    declare apptheme: string | null;
 
     declare readonly created_at: Date;
 }
@@ -58,13 +58,11 @@ User.init(
         },
         aboutme: {
             type: DataTypes.STRING,
-            allowNull: true,
-            defaultValue: "no bio :("
+            allowNull: true
         },
         pronouns: {
             type: DataTypes.STRING,
-            allowNull: true,
-            defaultValue: "_/_"
+            allowNull: true
         },
         apptheme: {
             type: DataTypes.STRING,
@@ -79,7 +77,7 @@ User.init(
     },
     {
         sequelize,
-        modelName: "User",
+        modelName: "users",
         tableName: "users",
         timestamps: false
     }

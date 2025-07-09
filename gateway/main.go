@@ -9,10 +9,10 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"strconv"
 	"strings"
 	"time"
-    "os"
 
 	"github.com/go-redis/redis/v8"
 	"github.com/gorilla/websocket"
@@ -22,12 +22,12 @@ import (
 
 var (
 	redisClient = redis.NewClient(&redis.Options{
-		Addr:     os.Getenv("REDIS_ADDR"),
-		Password: os.Getenv("REDIS_PASSWORD"),
+		Addr: os.Getenv("REDIS_ADDR"),
+		// Password: os.Getenv("REDIS_PASSWORD"),
 	})
 	upgrader = websocket.Upgrader{
 		CheckOrigin: func(r *http.Request) bool {
-			return true // TODO: fix
+			return true
 		},
 	}
 )

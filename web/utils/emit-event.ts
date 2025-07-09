@@ -5,7 +5,7 @@ import type { EventMap, GatewayMessage } from "~/types/gateway";
 
 dotenv.config();
 
-const connection = (process.env.redisconnectionstring as string);
+const connection = (process.env.redispgconnectionstring as string);
 
 export const redis = new Redis(connection);
 

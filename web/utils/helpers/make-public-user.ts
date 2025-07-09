@@ -3,7 +3,6 @@ import { UserFlags } from "~/types/users";
 
 import { BitfieldManager } from "../bitfields";
 
-// not sure if there is a better way...
 export function makePublicUser(user: User): PublicUser {
     const { password_hash, flags, ...publicUser } = user;
 

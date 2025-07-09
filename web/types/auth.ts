@@ -8,7 +8,7 @@ export const APIPostAuthRegisterBodySchema = z.object({
     username: z.string().regex(Config.username_constraint),
     password: z.string().regex(Config.password_constraint)
 });
-// P@ssw0rd!23Secure
+// password example: P@ssw0rd!23Secure
 
 export enum UserAuthRequiredAction {
     VerifyEmail = 0

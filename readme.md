@@ -62,7 +62,7 @@ For the setup, you can run `make` to automate (faster approach) or manually run 
 SECRET="somerandomsecret12345"
 REDIS_ADDR="redishost:6379"
 REDIS_PASSWORD="redispassword"
-PGCONNECTIONSTRING="postgresql://postgres:passwordforyourdb@yourhost:5432/databasename"
+pgconnectionstring="postgresql://postgres:passwordforyourdb@yourhost:5432/databasename"
 ```
 - install go @ https://go.dev/doc/install
 - go run main.go
@@ -73,10 +73,10 @@ PGCONNECTIONSTRING="postgresql://postgres:passwordforyourdb@yourhost:5432/databa
 ```env
 SECRET="somerandomsecret12345"
 RESEND_API_SECRET="resendapisecretkeyhere"
-connectionstring="postgresql://postgres:passwordforyourdb@yourhost:5432/databasename"
+pgconnectionstring="postgresql://postgres:passwordforyourdb@yourhost:5432/databasename"
 CAPTCHA_SECRET="somesecretkey" 
 # get captcha secret at https://www.cloudflare.com/application-services/products/turnstile/
-redisconnectionstring="redis://redisusername:thepassword@yourredishost:50952"
+redispgconnectionstring="redis://redisusername:thepassword@yourredishost:50952"
 ```
 - make sure that you have pnpm installed already, if not, use `npm i -g pnpm`
 - install deps using `pnpm install`

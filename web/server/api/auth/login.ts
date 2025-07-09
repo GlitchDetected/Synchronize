@@ -1,6 +1,7 @@
 import { HttpErrorMessage } from "~/constants/http-error";
 import { db } from "~/db";
-import { APIPostAuthLoginBodySchema, UserAuthRequiredAction } from "~/types/auth";
+import type { UserAuthRequiredAction } from "~/types/auth";
+import { APIPostAuthLoginBodySchema } from "~/types/auth";
 import { UserFlags } from "~/types/users";
 import { generateCookieHeaderFromJWT, verifyPassword } from "~/utils/auth";
 import { BitfieldManager } from "~/utils/bitfields";

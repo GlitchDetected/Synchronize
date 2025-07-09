@@ -38,7 +38,7 @@ check-env-gateway:
 		echo 'SECRET="somerandomsecret12345"' > $(GATEWAY_ENV); \
 		echo 'REDIS_ADDR="redishost:6379"' >> $(GATEWAY_ENV); \
 		echo 'REDIS_PASSWORD="redispassword"' >> $(GATEWAY_ENV); \
-		echo 'PGCONNECTIONSTRING="postgresql://postgres:passwordforyourdb@yourhost:5432/databasename"' >> $(GATEWAY_ENV); \
+		echo 'pgconnectionstring="postgresql://postgres:passwordforyourdb@yourhost:5432/databasename"' >> $(GATEWAY_ENV); \
 	fi
 	@echo "env exists in ./gateway"
 
@@ -47,9 +47,9 @@ check-env-web:
 		echo "Creating .env file in $(WEB_DIR)..."; \
 		echo 'SECRET="somerandomsecret12345"' > $(WEB_ENV); \
 		echo 'RESEND_API_SECRET="resendapisecretkeyhere"' >> $(WEB_ENV); \
-		echo 'connectionstring="postgresql://postgres:passwordforyourdb@yourhost:5432/databasename"' >> $(WEB_ENV); \
+		echo 'pgconnectionstring="postgresql://postgres:passwordforyourdb@yourhost:5432/databasename"' >> $(WEB_ENV); \
 		echo 'CAPTCHA_SECRET="somesecretkey"' >> $(WEB_ENV); \
-		echo 'redisconnectionstring="redis://redisusername:thepassword@yourredishost:50952"' >> $(WEB_ENV); \
+		echo 'redispgconnectionstring="redis://redisusername:thepassword@yourredishost:50952"' >> $(WEB_ENV); \
 	fi
 	@echo "env exists in ./web"
 

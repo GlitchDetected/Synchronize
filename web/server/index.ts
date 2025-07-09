@@ -5,7 +5,7 @@ import { join } from "path";
 
 import { HttpErrorCode, HttpErrorMessage } from "~/constants/http-error";
 import { db, sequelize } from "~/db/index";
-import models from "~/db/models/index";
+import models, { type ModelsMap } from "~/db/models/index";
 import { auth, via } from "~/utils/auth";
 import type { defineEndpoint } from "~/utils/define/endpoint";
 import { httpError } from "~/utils/http-error";
@@ -177,19 +177,20 @@ await (async () => {
     try {
         console.clear();
 
-        console.log("Testing database connection...");
         await sequelize.authenticate();
-        console.log("Database connection successful. Initializing models...");
 
-        Object.keys(models).forEach((ele) => {
-            const model = (models as any)[ele];
-            if (model.associate) {
-                model.associate(models);
+        Object.entries(models).forEach(([_, model]) => {
+            if ("associate" in model && typeof model.associate === "function") {
+                (model.associate as (models: ModelsMap) => void)(models);
             }
-            console.log(`Connected to model: ${model.name}`);
+
+            console.log(`Registered: ${model.name}`);
         });
 
-        await sequelize.sync({ force: false });
+        await sequelize.sync({
+            force: false
+        });
+
         console.log("Database models synced successfully.");
     } catch (error) {
         console.error("Error initializing database:", error);

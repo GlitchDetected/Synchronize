@@ -1,7 +1,8 @@
 import { HttpErrorMessage } from "~/constants/http-error";
 import { db } from "~/db";
 import { getUserIdByEmail, getUserIdByUsername } from "~/db/utils/users";
-import { APIPostAuthRegisterBodySchema, UserAuthRequiredAction } from "~/types/auth";
+import type { UserAuthRequiredAction } from "~/types/auth";
+import { APIPostAuthRegisterBodySchema } from "~/types/auth";
 import { UserFlags } from "~/types/users";
 import { generateCookieHeaderFromJWT, hashPassword } from "~/utils/auth";
 import { BitfieldManager } from "~/utils/bitfields";
@@ -29,7 +30,7 @@ async function createUser(request: Request) {
             password_hash: await hashPassword(data.password),
             username: data.username
         })
-        .returning(["id", "username", "email", "flags", "aboutme", "pronouns", "apptheme"])
+        .returning(["id", "username", "email"])
         .executeTakeFirst();
 
     if (!user) throw httpError();

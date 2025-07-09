@@ -36,9 +36,8 @@ export function MessageView() {
         if (oldestMessageId) search.append("before", oldestMessageId.toString());
 
         const msgs = await request<APIGetRoomMessagesResponse>("get", `/rooms/${params.rid}/messages?${search.toString()}`);
-        if (!Array.isArray(msgs)) return; // TODO: error?
+        if (!Array.isArray(msgs)) return;
 
-        // 👉 store message and message author properly
         for (const message of msgs) {
             addUser(message.author);
             Object.assign(message, { author: undefined });

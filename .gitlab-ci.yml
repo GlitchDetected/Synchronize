@@ -40,7 +40,7 @@ web-lint:
             - .pnpm-store
     needs:
         - web-install-dependencies
-    allow_failure: true # not required to work.. so..
+    allow_failure: true
 
 web-build:
     stage: web-build

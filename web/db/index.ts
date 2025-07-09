@@ -7,7 +7,7 @@ import type { Database } from "./types";
 
 dotenv.config();
 
-const connection = process.env.connectionstring;
+const connection = process.env.pgconnectionstring;
 
 if (!connection) {
     throw new Error("error creating models");
